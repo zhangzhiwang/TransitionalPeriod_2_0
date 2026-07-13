@@ -2,6 +2,7 @@ package algorithm;
 
 /**
  * 使用 1 << i 掩码打印 int 的二进制形式
+ * 由 cursor 自动生成
  */
 public class PrintIntBinary {
 
