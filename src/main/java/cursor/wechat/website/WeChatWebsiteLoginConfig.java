@@ -1,4 +1,4 @@
-package wechat.website;
+package cursor.wechat.website;
 
 /**
  * 微信开放平台「网站应用」登录相关配置。

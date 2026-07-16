@@ -1,4 +1,4 @@
-package wechat.website;
+package cursor.wechat.website;
 
 import java.io.IOException;
 import java.util.UUID;

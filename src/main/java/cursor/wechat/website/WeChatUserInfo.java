@@ -1,4 +1,4 @@
-package wechat.website;
+package cursor.wechat.website;
 
 /**
  * 网站应用授权后通过 /sns/userinfo 获取的用户基本信息。

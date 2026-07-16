@@ -1,4 +1,4 @@
-package wechat.website;
+package cursor.wechat.website;
 
 /**
  * 通过 code 换取的网站应用 OAuth 凭证结果。
