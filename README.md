@@ -1908,3 +1908,78 @@
 - 同步远程，便于后续继续开发与学习
 
 ---
+
+## 2026-07-18（续：push 因认证失败未完成）
+
+### 会话的主要目的
+- 记录本地 commit 已成功、远程 push 因 GitHub 凭据不可用而失败
+
+### 完成的主要任务
+1. 本地提交：`971b6cc`（master 领先 origin 1 个提交）
+2. push 失败：`could not read Username for 'https://github.com'`
+3. 环境无 `gh`、无 SSH 公钥、钥匙串无 github.com 凭据
+
+### 关键决策和解决方案
+- 需用户在本机终端或 IDEA 登录 GitHub 后执行：`git push origin master`
+- 可选后续：安装 GitHub CLI（`gh auth login`）或配置 SSH，便于 Agent 自动 push
+
+### 使用的技术栈
+- Git、HTTPS remote
+
+### 修改了哪些文件
+- `README.md`（追加本条说明；本条本身尚未纳入上一次 commit）
+
+### 修改文件的目的是什么
+- 如实记录 push 未完成原因与后续操作
+
+---
+
+## 2026-07-18（Git 推送是否每次都要输入账号密码）
+
+### 会话的主要目的
+- 解答终端 `git push` 是否每次都要输入用户名和密码
+
+### 完成的主要任务
+1. 说明 GitHub 已不支持用账户登录密码做 git 操作，需 PAT 或 SSH
+2. 说明用凭据助手 / SSH 后可免重复输入
+
+### 关键决策和解决方案
+- HTTPS：用 Personal Access Token + macOS Keychain（`git config --global credential.helper osxkeychain`）保存一次即可
+- SSH：生成密钥并加到 GitHub，remote 改为 SSH 地址后长期免密输入
+- IDEA 登录过 GitHub 后，IDE 内 Push 通常也不用每次手输
+
+### 使用的技术栈
+- Git、GitHub HTTPS/SSH、macOS Keychain
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录认证与免重复输入的做法
+
+---
+
+## 2026-07-18（GitHub PAT 在哪里查看/创建）
+
+### 会话的主要目的
+- 说明 GitHub Personal Access Token 的入口与注意点
+
+### 完成的主要任务
+1. 给出 GitHub 创建 PAT 的路径
+2. 说明 token 只在创建时显示一次，丢失需重建
+
+### 关键决策和解决方案
+- 路径：GitHub → Settings → Developer settings → Personal access tokens
+- 推荐 Fine-grained 或 Classic；git push 至少需要 repo 相关权限
+- 创建后复制保存；页面无法再次查看完整 token 明文
+
+### 使用的技术栈
+- GitHub PAT
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录 PAT 获取方式
+
+---
