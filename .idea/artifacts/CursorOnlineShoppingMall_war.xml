@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CursorOnlineShoppingMall:war">
+    <output-path>$PROJECT_DIR$/CursorOnlineShoppingMall/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>CursorOnlineShoppingMall</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="CursorOnlineShoppingMall.war">
+      <element id="artifact" artifact-name="CursorOnlineShoppingMall:war exploded" />
+    </root>
+  </artifact>
+</component>

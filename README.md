@@ -2098,3 +2098,1043 @@
 - 按项目规则记录本次检查结果
 
 ---
+
+## 2026-07-18（新建子模块 CursorOnlineShoppingMall）
+
+### 会话的主要目的
+- 在父工程下新增 Maven 子模块 `CursorOnlineShoppingMall`（packaging=pom）
+
+### 完成的主要任务
+1. 创建 `CursorOnlineShoppingMall/pom.xml`（继承父工程，`packaging` 为 `pom`）
+2. 在根 `pom.xml` 的 `<modules>` 中注册该子模块
+3. 执行 `mvn validate` 校验模块可被 Maven 识别
+
+### 关键决策和解决方案
+- 按现有 `CursorWebsite` 风格继承 `org.example:TransitionalPeriod_2_0:1.0-SNAPSHOT`
+- 预留空 `<modules>`，便于后续拆 common/api/web 等商城子工程
+
+### 使用的技术栈
+- Maven（多模块、packaging=pom）
+
+### 修改了哪些文件
+- 新增：`CursorOnlineShoppingMall/pom.xml`
+- 修改：根目录 `pom.xml`、`README.md`
+
+### 修改文件的目的是什么
+- 落地在线商城 pom 子模块骨架，供后续功能扩展
+
+---
+
+## 2026-07-18（CursorOnlineShoppingMall 改为 Web 工程）
+
+### 会话的主要目的
+- 将 `CursorOnlineShoppingMall` 从 packaging=pom 改为 Web（war）工程
+
+### 完成的主要任务
+1. `pom.xml` 改为 `packaging=war`，引入 Spring Boot Web / JSP / MyBatis-Plus / MySQL
+2. 新增启动类 `MallApplication`、`application.yml`、`web.xml`、占位 `index.jsp`
+3. `mvn compile` 校验通过
+
+### 关键决策和解决方案
+- 对齐架构文档：原生 HTML/JSP + Spring Boot + MyBatis-Plus + MySQL
+- 参考 `CursorWebsite` 结构；端口 `8081`、上下文 `/cursorMall`，避免与官网冲突
+- 数据源默认库名 `cursor_mall`，启动 SQL 初始化为 `never`
+
+### 使用的技术栈
+- Maven war、Spring Boot 2.7、MyBatis-Plus、MySQL、JSP/JSTL
+
+### 修改了哪些文件
+- 修改：`CursorOnlineShoppingMall/pom.xml`、`README.md`
+- 新增：`MallApplication.java`、`application.yml`、`WEB-INF/web.xml`、`index.jsp`
+
+### 修改文件的目的是什么
+- 落地商城 Web 工程骨架，便于后续按需求文档开发
+
+---
+
+## 2026-07-18（网上商城页面 UI 原型）
+
+### 会话的主要目的
+- 依据商城需求文档，按功能生成 UI 原型并放入「页面 UI 原型」目录
+
+### 完成的主要任务
+1. 新建目录 `网上商城相关文档/页面 UI 原型/`
+2. 编写京东风格视觉总规范 + 13 份页面原型（含地址编辑页）
+3. 每份原型含信息架构、ASCII 线框、交互说明
+
+### 关键决策和解决方案
+- 采用与 CursorWebsite 设计图一致的 Markdown 线框原型，便于评审与落地
+- 色彩参考京东：主色 `#E4393C`，底色 `#F5F5F5`
+- 需求中的地址编辑虽未单独编号，但流程必需，故单独出原型
+
+### 使用的技术栈
+- Markdown、Mermaid 流程图、ASCII 线框
+
+### 修改了哪些文件
+- 新增：`页面 UI 原型/00-视觉与交互总规范.md` 及 `UI原型-*.md` 共 14 个文件
+- 修改：`README.md`
+
+### 修改文件的目的是什么
+- 为后续 JSP/接口开发提供一页一功能的 UI 依据
+
+---
+
+## 2026-07-18（网上商城前后端接口文档）
+
+### 会话的主要目的
+- 按需求文档单独编写前后端接口说明（Markdown）
+
+### 完成的主要任务
+1. 新增 `前后端接口文档.md`（与需求文档同级）
+2. 覆盖认证、首页、分类、商品、购物车、地址、订单与微信支付
+3. 约定统一 JSON 响应、Session 登录、页面路由与 API 对照表
+
+### 关键决策和解决方案
+- Base URL：`/cursorMall`；JSON 前缀 `/api/**`；成功码 `code=0`
+- 密码仅约定服务端加密落库；注册成功异步发邮件在注册接口说明中体现
+- 订单确认拆为 preview + create（含微信预支付参数）
+
+### 使用的技术栈
+- Markdown 接口文档；对齐 Spring Boot Session + REST 风格
+
+### 修改了哪些文件
+- 新增：`CursorOnlineShoppingMall/.../网上商城相关文档/前后端接口文档.md`
+- 修改：`README.md`
+
+### 修改文件的目的是什么
+- 为后续实现 Controller/前端联调提供接口契约
+
+---
+
+## 2026-07-18（Mac 屏幕黑屏时间设置）
+
+### 会话的主要目的
+- 说明如何设置 Mac 电脑屏幕多久后黑屏
+
+### 完成的主要任务
+1. 给出系统设置中「锁定屏幕 / 显示器关闭」相关路径，以及终端 `pmset` 备选方式
+
+### 关键决策和解决方案
+- 优先用「系统设置 → 锁定屏幕 / 电池与节能」调节关闭显示器时间
+
+### 使用的技术栈
+- macOS 系统设置
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（网上商城库设计与建库）
+
+### 会话的主要目的
+- 按商城文档设计数据库；新建与 CursorOnlineShoppingMall 对应的下划线库名
+
+### 完成的主要任务
+1. 创建 MySQL 库 `cursor_online_shopping_mall`
+2. 编写 `schema.sql` / `data.sql` 并落库执行
+3. 新增《数据库设计文档.md》，更新 `application.yml` 数据源
+
+### 关键决策和解决方案
+- 库名采用模块名下划线形式；表名 `mall_*` 前缀 + 下划线字段；订单表避开保留字 `order`
+- 订单/明细保留收货与商品快照，满足订单列表历史展示与微信支付字段
+
+### 使用的技术栈
+- MySQL 8、utf8mb4、InnoDB、Spring Boot datasource
+
+### 修改了哪些文件
+- `CursorOnlineShoppingMall/src/main/resources/db/schema.sql`（新建建表脚本）
+- `CursorOnlineShoppingMall/src/main/resources/db/data.sql`（新建演示数据）
+- `CursorOnlineShoppingMall/src/main/webapp/WEB-INF/网上商城相关文档/数据库设计文档.md`（新建设计说明）
+- `CursorOnlineShoppingMall/src/main/resources/application.yml`（数据源库名改为 cursor_online_shopping_mall）
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 落地商城库表设计并与模块命名规范对齐，供后续开发使用
+
+---
+
+## 2026-07-18（CursorWebsite 数据库设计）
+
+### 会话的主要目的
+- 依据网站相关文档为 CursorWebsite 完成/补齐数据库设计
+
+### 完成的主要任务
+1. 按架构文档补齐 about/product/contact/job/friend_link/page_view_daily 等表
+2. 更新 schema.sql、data.sql，新增《数据库设计文档.md》并落库执行
+
+### 关键决策和解决方案
+- 库名保持 `cursor_website`；表与字段全下划线命名
+- 联系咨询与网站留言分表；产品特性/规格用 JSON 字段；网站地图不建表
+- 统计用 `page_view_daily` 按日按页汇总，不做 IP 明细
+
+### 使用的技术栈
+- MySQL 8、utf8mb4、InnoDB
+
+### 修改了哪些文件
+- `CursorWebsite/src/main/resources/db/schema.sql`（全量建表）
+- `CursorWebsite/src/main/resources/db/data.sql`（演示数据）
+- `CursorWebsite/src/main/webapp/WEB-INF/网站相关文档/数据库设计文档.md`（新建设计说明）
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 覆盖规划内 10 项功能的持久化模型，供后续开发使用
+
+---
+
+## 2026-07-18（网上商城首页前后端预览）
+
+### 会话的主要目的
+- 按需求/接口/UI 原型实现商城首页，数据写死以便先看效果
+
+### 完成的主要任务
+1. 后端：HomeService 写死数据、HomeController 转发 JSP、HomeApiController 提供 `/api/home`
+2. 前端：京东风 home.jsp + 底栏 + 轮播/加购交互
+3. 启动类暂排除数据源自动配置，不连库即可预览
+
+### 关键决策和解决方案
+- 暂不强制登录拦截，方便直接打开首页
+- 加购仅 toast，分类/详情链接预留路由
+- 访问地址：`http://localhost:8081/cursorMall/home`
+
+### 使用的技术栈
+- Spring Boot 2.7、JSP/JSTL、原生 CSS/JS
+
+### 修改了哪些文件
+- 新增 `common/ApiResponse`、`model/*`、`HomeService(Impl)`、`HomeController`、`HomeApiController`
+- 新增 `WEB-INF/jsp/home.jsp`、`tabbar.jsp`、`css/mall.css`、`js/mall.js`
+- 修改 `MallApplication.java`、`index.jsp`、`README.md`
+
+### 修改文件的目的是什么
+- 落地可预览的首页效果，后续再接库与登录
+
+---
+
+## 2026-07-18（Redis 历史版本官网下载位置）
+
+### 会话的主要目的
+- 说明 Redis 历史版本在官网上的下载入口
+
+### 完成的主要任务
+1. 告知 Download 页与 GitHub Releases / 源码归档位置
+
+### 关键决策和解决方案
+- 官网 Download 提供版本选择；完整历史以 GitHub redis/redis Releases 或 download.redis.io 归档为准
+
+### 使用的技术栈
+- 无（答疑）
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis 历史版本官网点击路径）
+
+### 会话的主要目的
+- 说明从 Redis 官网一级一级点到历史版本归档的路径
+
+### 完成的主要任务
+1. 梳理 redis.io → Downloads → 源码/稳定版链接 → download.redis.io/releases 的入口关系
+
+### 关键决策和解决方案
+- 新版官网 Download 页不直接罗列全部旧版；完整历史在 download.redis.io/releases，常从「Install from source / Latest stable」相关链接进入 download.redis.io 后再进 releases
+
+### 使用的技术栈
+- 无（答疑）
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Mac 编译安装 Redis 步骤）
+
+### 会话的主要目的
+- 说明在 macOS 上从源码编译安装 Redis 的步骤
+
+### 完成的主要任务
+1. 给出下载、解压、make、安装、启动与验证的命令流程
+
+### 关键决策和解决方案
+- 以官方源码 `make` / `make install` 为主；可选 brew 作对照；说明 Apple Silicon 一般可直接编译
+
+### 使用的技术栈
+- Redis 源码、make、macOS
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（排查 Redis 6.2.6 Mac make 失败）
+
+### 会话的主要目的
+- 分析用户编译 redis-6.2.6 时 replication.o 报错的原因与解决办法
+
+### 完成的主要任务
+1. 判定为新版 macOS SDK 下 stat64/fstat64 宏选择错误（已知问题）
+2. 给出改 config.h 补丁，或升级到 ≥6.2.14 / 更新主版本的方案
+
+### 关键决策和解决方案
+- 优先建议换 6.2.14+ 或不低于 7.2.2 的版本；若必须用 6.2.6，在 `src/config.h` 的 `__APPLE__` 分支增加 `_DARWIN_C_SOURCE`
+
+### 使用的技术栈
+- Redis 源码、Apple Clang、macOS SDK
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（确认 Redis config.h 补丁写法）
+
+### 会话的主要目的
+- 确认用户在 `src/config.h` 中加入 `_DARWIN_C_SOURCE` 的修改是否正确
+
+### 完成的主要任务
+1. 确认写法正确，并提示继续 `make distclean && make`
+
+### 关键决策和解决方案
+- `#ifdef __APPLE__` 下先定义 `_DARWIN_C_SOURCE` 再 include 头文件，符合官方 issue 补丁
+
+### 使用的技术栈
+- Redis 源码 config.h
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis make install 权限被拒）
+
+### 会话的主要目的
+- 解决 make 通过后 make install 写入 /usr/local/bin 权限不足
+
+### 完成的主要任务
+1. 说明需使用 sudo make install；pkg-config 警告可忽略或 brew 安装
+
+### 关键决策和解决方案
+- `/usr/local/bin` 需管理员权限；编译已成功，仅安装步骤缺 sudo
+
+### 使用的技术栈
+- Redis make install、macOS 权限
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis 安装后如何使用）
+
+### 会话的主要目的
+- 说明源码安装完成后的 Redis 基本启动与使用方法
+
+### 完成的主要任务
+1. 给出启动服务、redis-cli、常用命令与后台运行示例
+
+### 关键决策和解决方案
+- 前台 `redis-server` + 另一终端 `redis-cli`；日常可用配置文件后台启动
+
+### 使用的技术栈
+- Redis Server / redis-cli
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis 命令行连接与账号密码）
+
+### 会话的主要目的
+- 说明 redis-cli 如何连接，以及用户名/密码（AUTH/ACL）怎么用
+
+### 完成的主要任务
+1. 介绍默认无密码连接、requirepass、Redis 6 ACL 用户名密码用法
+
+### 关键决策和解决方案
+- 默认安装通常无认证；设置 `requirepass` 或 ACL 后再用 `-a` / `AUTH` 连接
+
+### 使用的技术栈
+- redis-cli、Redis AUTH / ACL
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis 删除所有 key）
+
+### 会话的主要目的
+- 说明清空当前库/全部库所有 key 的命令
+
+### 完成的主要任务
+1. 给出 FLUSHDB、FLUSHALL 及安全注意点
+
+### 关键决策和解决方案
+- 当前库用 FLUSHDB；所有库用 FLUSHALL；生产慎用
+
+### 使用的技术栈
+- Redis CLI
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Redis 查看所有 key）
+
+### 会话的主要目的
+- 说明查看当前库全部 key 的命令
+
+### 完成的主要任务
+1. 给出 KEYS * 与 SCAN 游标遍历两种方式
+
+### 关键决策和解决方案
+- 本地调试可用 KEYS *；数据量大时用 SCAN 避免阻塞
+
+### 使用的技术栈
+- Redis CLI
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（给 Redis 设置密码）
+
+### 会话的主要目的
+- 说明如何为 Redis 配置访问密码
+
+### 完成的主要任务
+1. 给出 redis.conf requirepass、运行时 CONFIG SET、以及 redis-cli 认证方式
+
+### 关键决策和解决方案
+- 持久化推荐改配置文件 requirepass 后重启；临时可用 CONFIG SET requirepass
+
+### 使用的技术栈
+- Redis 配置 / AUTH
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（redis-cli 指定 IP 和密码）
+
+### 会话的主要目的
+- 说明 redis-cli 连接时如何指定主机 IP 与密码
+
+### 完成的主要任务
+1. 给出 `-h` / `-p` / `-a` 及 `--user` 示例
+
+### 关键决策和解决方案
+- `redis-cli -h IP -p 端口 -a 密码`
+
+### 使用的技术栈
+- redis-cli
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（商城登录注册真实写库实现）
+
+### 会话的主要目的
+- 实现 CursorOnlineShoppingMall 登录/注册模块前后端，真实写入 MySQL
+
+### 完成的主要任务
+1. 启用数据源；新增 MallUser 实体 / Mapper / Dao / AuthService / MailService
+2. 实现注册（SHA-256 落库 + 异步邮件）、登录（Session）、退出、当前用户 API
+3. 登录拦截器保护首页等；login.jsp / register.jsp + CSS/JS AJAX
+4. 本机导入 `schema.sql` / `data.sql`；`mvn compile` 通过
+
+### 关键决策和解决方案
+- 密码 SHA-256 十六进制小写，与 data.sql 中 demo/123456 一致
+- `mall.mail.enabled=false` 时邮件仅打日志，不阻断注册写库
+- 接口：`POST /api/auth/register|login|logout`，`GET /api/auth/me`
+
+### 使用的技术栈
+- Spring Boot 2.7、MyBatis-Plus、Session、JSP、原生 JS、MySQL、可选 JavaMail
+
+### 修改了哪些文件
+- 新增：Auth*、MallUser*、PasswordHasher、LoginAuthInterceptor、login/register.jsp 等
+- 修改：`MallApplication.java`、`pom.xml`、`application.yml`、`mall.css`、`mall.js`、`HomeController.java`、`README.md`
+
+### 修改文件的目的是什么
+- 落地需求 0.1–0.3 的登录注册与登录拦截，并保证注册真实入库
+
+---
+
+## 2026-07-18（配置商城 MySQL 库表与演示数据）
+
+### 会话的主要目的
+- 代用户完成 CursorOnlineShoppingMall 数据库初始化配置
+
+### 完成的主要任务
+1. 确认本机 MySQL 已运行（mysqld is alive）
+2. 创建库 `cursor_online_shopping_mall` 并导入 schema.sql、data.sql
+3. 验证演示用户 `demo` 已写入 mall_user
+
+### 关键决策和解决方案
+- 数据源与 `application.yml` 一致：root / 12345678 / 库名 cursor_online_shopping_mall
+- 邮件仍保持 `mall.mail.enabled=false`（无真实 SMTP 账号前不启真发信）
+
+### 使用的技术栈
+- MySQL 8、SQL 脚本导入
+
+### 修改了哪些文件
+- 数据库：新建/灌入 `cursor_online_shopping_mall` 各表与演示数据
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 让登录注册可直接连库验证
+
+---
+
+## 2026-07-18（配置 QQ 邮箱 SMTP 发送注册邮件）
+
+### 会话的主要目的
+- 按用户提供的 QQ 邮箱与授权码，开启注册成功真实发信
+
+### 完成的主要任务
+1. 更新 `application.yml`：`smtp.qq.com:465` + SSL
+2. 设置发件账号为用户 QQ 邮箱，`mall.mail.enabled=true`
+
+### 关键决策和解决方案
+- 使用 QQ 授权码而非 QQ 登录密码
+- README 不记录授权码明文；提醒勿将含密钥的配置推到公开仓库
+
+### 使用的技术栈
+- Spring Mail、QQ SMTP
+
+### 修改了哪些文件
+- `CursorOnlineShoppingMall/src/main/resources/application.yml`
+- `README.md`
+
+### 修改文件的目的是什么
+- 注册成功后异步向用户邮箱发送通知邮件
+
+---
+
+## 2026-07-18（注册改为邮箱 6 位验证码）
+
+### 会话的主要目的
+- 按更新后的需求 0.2.2：注册前向邮箱发送 6 位验证码，校验后再注册
+
+### 完成的主要任务
+1. 新增 `POST /api/auth/send-register-code` 与 `RegisterCodeStore`
+2. 注册接口增加 `verifyCode` 校验（一次性、5 分钟有效、60 秒重发限制）
+3. 更新注册页 UI/JS、拦截器放行、接口文档
+
+### 关键决策和解决方案
+- 验证码邮件同步发送，便于前端获知成败；注册成功不再另发成功邮件
+- 验证码存内存（ConcurrentHashMap），与 QQ SMTP 已有配置配合
+
+### 使用的技术栈
+- Spring Boot、JavaMail、JSP/原生 JS
+
+### 修改了哪些文件
+- 后端：Auth*、MailService*、RegisterCodeStore、RegisterRequest、WebMvcConfig 等
+- 前端：register.jsp、mall.js、mall.css
+- 文档：前后端接口文档.md、README.md
+
+### 修改文件的目的是什么
+- 对齐需求文档「邮件发送 6 位验证码后完成注册」
+
+---
+
+## 2026-07-18（确认注册邮件发件邮箱）
+
+### 会话的主要目的
+- 确认验证码邮件是否使用用户提供的 QQ 邮箱发出
+
+### 完成的主要任务
+1. 核对 `application.yml` 中 `spring.mail.username` 与 `mall.mail.enabled`
+
+### 关键决策和解决方案
+- 发件人即为用户提供的 QQ 邮箱；收件人为注册页填写的邮箱
+
+### 使用的技术栈
+- Spring Mail / QQ SMTP
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录发件账号确认说明
+
+---
+
+## 2026-07-18（解决 8081 端口占用无法启动）
+
+### 会话的主要目的
+- 处理 MallApplication 启动失败：Port 8081 was already in use
+
+### 完成的主要任务
+1. 定位占用 8081 的进程：java PID 81522
+2. 结束该进程，释放端口
+
+### 关键决策和解决方案
+- 多为上次未停干净的 Spring Boot 实例；`kill` 释放后可重新 Run
+
+### 使用的技术栈
+- macOS `lsof` / 进程管理
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 记录端口占用排查与处理
+
+---
+
+## 2026-07-18（商城预览进程退出通知）
+
+### 会话的主要目的
+- 告知用户此前用于验证首页的 Spring Boot 后台任务已结束（exit 1）
+
+### 完成的主要任务
+1. 查看终端输出并简要说明进程已不在运行
+
+### 关键决策和解决方案
+- 如需再次预览首页，重新启动 `MallApplication` 或 `mvn spring-boot:run`
+
+### 使用的技术栈
+- Spring Boot / CursorOnlineShoppingMall
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话通知处理
+
+---
+
+## 2026-07-18（lsof 命令用法说明）
+
+### 会话的主要目的
+- 讲解 macOS/Linux 下 `lsof` 的常用用法（查端口占用）
+
+### 完成的主要任务
+1. 说明 `lsof` 含义与查监听端口、按 PID 杀进程的常用命令
+
+### 关键决策和解决方案
+- 查端口：`lsof -nP -iTCP:端口 -sTCP:LISTEN`
+- 结束进程：`kill PID` 或 `kill -9 PID`
+
+### 使用的技术栈
+- 终端命令 lsof
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录学习笔记
+
+---
+
+## 2026-07-18（如何用 lsof 查看端口占用）
+
+### 会话的主要目的
+- 学习用 `lsof` 查看某端口被哪个进程占用
+
+### 完成的主要任务
+1. 说明常用 `lsof -iTCP:端口 -sTCP:LISTEN` 用法
+2. 补充结束进程的 `kill` 示例
+
+### 关键决策和解决方案
+- 看 LISTEN 状态即可定位占用端口的服务进程；结合 PID 用 kill 释放
+
+### 使用的技术栈
+- macOS / Unix `lsof`
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录端口排查命令，便于后续自学
+
+---
+
+## 2026-07-18（实现退出登录 0.4）
+
+### 会话的主要目的
+- 按需求文档新增 0.4 退出登录：清 Session，昵称消失，顶部显示登录/注册
+
+### 完成的主要任务
+1. 新增 `MeController` + `me.jsp`（已登录 / 游客双态）
+2. 退出按钮调用已有 `POST /api/auth/logout`，成功后回到 `/me` 游客态
+3. `/me` 放行登录拦截，以便退出后停留展示登录+注册按钮
+
+### 关键决策和解决方案
+- 复用后端 logout API；前端确认后退出并刷新「我的」页
+- 游客顶部展示登录+注册（对齐 0.4.1）；订单/地址入口仅登录可见
+
+### 使用的技术栈
+- Spring MVC、Session、JSP/JSTL、原生 JS/CSS
+
+### 修改了哪些文件
+- 新增：`MeController.java`、`me.jsp`
+- 修改：`WebMvcConfig.java`、`mall.css`、`mall.js`、接口文档、`README.md`
+
+### 修改文件的目的是什么
+- 落地退出登录交互与游客态 UI
+
+---
+
+## 2026-07-18（Mac 自带快捷键设置入口）
+
+### 会话的主要目的
+- 说明 macOS 系统自带键盘快捷键的查看与自定义位置
+
+### 完成的主要任务
+1. 给出系统设置路径：键盘 → 键盘快捷键
+2. 列出常用分类与注意点
+
+### 关键决策和解决方案
+- 使用「系统设置 → 键盘 → 键盘快捷键」管理；冲突时可关闭或改键
+
+### 使用的技术栈
+- macOS 系统设置
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录 Mac 快捷键设置入口，便于自学
+
+---
+
+## 2026-07-18（取消 / 改掉 Mac ⌘Q 退出快捷键）
+
+### 会话的主要目的
+- 说明如何避免误触 Command+Q 退出应用
+
+### 完成的主要任务
+1. 给出系统设置「App 快捷键」改绑退出菜单的步骤
+2. 说明全局彻底禁用可借助 Karabiner-Elements
+
+### 关键决策和解决方案
+- 系统无「直接关闭 ⌘Q」开关；用 App 快捷键把「退出」改成更难按的组合，或用 Karabiner 拦截
+
+### 使用的技术栈
+- macOS 系统设置 /（可选）Karabiner-Elements
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录取消 ⌘Q 的可行做法
+
+---
+
+## 2026-07-18（Karabiner-Elements 禁用 ⌘Q 设置说明）
+
+### 会话的主要目的
+- 指导用 Karabiner-Elements 拦截 / 改写 Command+Q
+
+### 完成的主要任务
+1. 说明安装、授权与 Complex Modifications 配置步骤
+2. 给出禁用 ⌘Q 的 JSON 规则示例思路
+
+### 关键决策和解决方案
+- 用 Complex Modifications 将 `command+q` 映射为无操作或其它组合键，避免误退 App
+
+### 使用的技术栈
+- Karabiner-Elements
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录 Karabiner 配置步骤
+
+---
+
+## 2026-07-18（Cursor MCP 是什么）
+
+### 会话的主要目的
+- 解释 Cursor 中 MCP（Model Context Protocol）的含义与用途
+
+### 完成的主要任务
+1. 说明 MCP 是模型与外部工具/数据源的标准连接协议
+2. 举例常见用途（浏览器、数据库、文档、GitHub 等）
+
+### 关键决策和解决方案
+- 用「给 AI 插上外部能力插头」类比；在 Cursor Settings → MCP 中配置服务器
+
+### 使用的技术栈
+- Cursor、MCP（Model Context Protocol）
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 记录 MCP 概念说明，便于学习 Cursor
+
+---
+
+## 2026-07-18（解释 Cursor Skill 是什么）
+
+### 会话的主要目的
+- 向用户说明 Cursor Skill 的含义与用途
+
+### 完成的主要任务
+1. 基于 create-skill 文档概括 Skill 定义、存放位置与触发方式
+
+### 关键决策和解决方案
+- Skill = 可复用的代理能力说明（SKILL.md）；按任务自动或显式选用
+
+### 使用的技术栈
+- Cursor Agent Skills
+
+### 修改了哪些文件
+- `README.md`（追加本条答疑总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Cursor Skill 教程）
+
+### 会话的主要目的
+- 为用户提供 Cursor Skill 从概念到动手的教程
+
+### 完成的主要任务
+1. 说明 Skill 是什么、目录结构、个人/项目存放位置、description 写法、触发方式与示例
+
+### 关键决策和解决方案
+- 以官方 create-skill 规范为准；示例用「会话结束追加 README」类项目习惯技能
+
+### 使用的技术栈
+- Cursor Agent Skills（SKILL.md）
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录教程答疑
+
+---
+
+## 2026-07-18（再次简述什么是 Skills）
+
+### 会话的主要目的
+- 用更短的话解释 Cursor Skills 是什么
+
+### 完成的主要任务
+1. 一句话定义 + 与 Rule 区别 + 存放位置
+
+### 关键决策和解决方案
+- Skills = Agent 可复用的任务手册（SKILL.md）
+
+### 使用的技术栈
+- Cursor Agent Skills
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（Skills 是否只有 Cursor 才有）
+
+### 会话的主要目的
+- 说明 Skills 是否为 Cursor 独有
+
+### 完成的主要任务
+1. 区分「Cursor Agent Skills 产品形态」与「给 AI 挂专项能力」的通用概念
+
+### 关键决策和解决方案
+- Cursor 的 SKILL.md / 目录约定是 Cursor 体系内的；同类能力在其他产品里常有不同名字与格式
+
+### 使用的技术栈
+- Cursor Agent Skills（概念对比）
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（生成 commit-helper Skill）
+
+### 会话的主要目的
+- 为用户创建可用的 Cursor commit Skill
+
+### 完成的主要任务
+1. 在 `~/.cursor/skills/commit-helper/SKILL.md` 写入提交流程、文案规范与安全约束
+
+### 关键决策和解决方案
+- 放个人技能目录，全项目可用；未设 disable-model-invocation，便于用户说「提交/commit」时自动选用
+- 流程对齐既有 git 安全规则（并行 status/diff/log、HEREDOC、不擅自 push）
+
+### 使用的技术栈
+- Cursor Agent Skills、Git
+
+### 修改了哪些文件
+- `~/.cursor/skills/commit-helper/SKILL.md`（新建）
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 提供可复用的安全 commit 技能；并按规则记录会话
+
+---
+
+## 2026-07-18（说明 commit-helper 约束）
+
+### 会话的主要目的
+- 向用户说明刚生成的 commit-helper Skill 有哪些约束与规定
+
+### 完成的主要任务
+1. 归纳触发条件、流程、文案风格、安全禁令等要点
+
+### 关键决策和解决方案
+- 以 `~/.cursor/skills/commit-helper/SKILL.md` 原文为准作答
+
+### 使用的技术栈
+- Cursor Agent Skills
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（commit-helper 强制带 issue 号）
+
+### 会话的主要目的
+- 按用户要求更新 commit-helper：提交说明必须带 issue 号
+
+### 完成的主要任务
+1. 修改 `~/.cursor/skills/commit-helper/SKILL.md`，要求 `(#N)` / `#N` / `Fixes|Closes|Refs #N`，缺失则先询问
+
+### 关键决策和解决方案
+- 不允许编造 issue 号；示例文案同步加上 issue 引用
+
+### 使用的技术栈
+- Cursor Agent Skills
+
+### 修改了哪些文件
+- `~/.cursor/skills/commit-helper/SKILL.md`
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 落实「commit 必须带 issue 号」约束
+
+---
+
+## 2026-07-18（澄清 commit-helper issue 号是否硬拦截）
+
+### 会话的主要目的
+- 说明「必须带 issue 号」是 Skill 对 Agent 的约束，还是 git 硬性拦截
+
+### 完成的主要任务
+1. 澄清：Skill 会让 Agent 缺号时先询问；裸 git commit 本身不会因此失败
+
+### 关键决策和解决方案
+- 若需真正提交失败拦截，需另加 commit-msg hook / CI 检查
+
+### 使用的技术栈
+- Cursor Skills vs Git hooks
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（说明说「提交」时是否自动用 skill）
+
+### 会话的主要目的
+- 解释用户说「提交」时 Agent 是否自动按 commit-helper 生成 message
+
+### 完成的主要任务
+1. 说明 description 匹配后会加载 skill；生成 message 并在明确要求时执行 commit
+
+### 关键决策和解决方案
+- 点名 commit-helper 最稳；日常说「帮我 commit/#issue」通常会触发
+
+### 使用的技术栈
+- Cursor Agent Skills
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话答疑
+
+---
+
+## 2026-07-18（用户请求提交，等待 issue 号）
+
+### 会话的主要目的
+- 用户要求提交代码；按 commit-helper 需 issue 号，暂未执行 commit
+
+### 完成的主要任务
+1. 检查 git status/diff/log，确认有商城模块等大量已暂存/未暂存变更
+2. 向用户索取 issue 号后再提交
+
+### 关键决策和解决方案
+- 遵守 commit-helper：无 issue 不提交、不编造编号
+
+### 使用的技术栈
+- Git、Cursor commit-helper Skill
+
+### 修改了哪些文件
+- `README.md`（追加本条总结）
+
+### 修改文件的目的是什么
+- 按项目规则记录会话状态
+
+---

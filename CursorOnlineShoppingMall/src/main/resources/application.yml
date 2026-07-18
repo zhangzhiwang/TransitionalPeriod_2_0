@@ -1,0 +1,57 @@
+# CursorOnlineShoppingMall Spring Boot 配置（JDK8 + Boot 2.7）。
+# （由 Curosr 自动生成）
+
+server:
+  port: 8081
+  servlet:
+    # 便于 JSP 在内嵌 Tomcat 下解析。
+    register-default-servlet: true
+    context-path: /cursorMall
+
+spring:
+  datasource:
+    # 请按本机 MySQL 修改账号密码。
+    # 库名与模块 CursorOnlineShoppingMall 对应，采用下划线命名。
+    url: jdbc:mysql://127.0.0.1:3306/cursor_online_shopping_mall?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      # never：启动不自动跑 SQL；首次请手工执行 db/schema.sql 与 db/data.sql。
+      mode: never
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      encoding: UTF-8
+      continue-on-error: true
+  mail:
+    # QQ 邮箱 SMTP（使用授权码，非登录密码）。
+    host: smtp.qq.com
+    port: 465
+    username: 934109401@qq.com
+    password: iwsaaqmsgnyzbgah
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: smtp.qq.com
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+# 商城业务开关。
+mall:
+  mail:
+    # 已配置 QQ SMTP，开启真实发信。
+    enabled: true

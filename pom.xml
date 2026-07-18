@@ -11,6 +11,7 @@
         <module>SPIOracleDriver</module>
         <module>SPIUserApp</module>
         <module>CursorWebsite</module>
+        <module>CursorOnlineShoppingMall</module>
     </modules>
     <name>TransitionalPeriod_2_0 Maven Webapp</name>
   <url>http://maven.apache.org</url>
