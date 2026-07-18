@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CursorWebsite:war">
+    <output-path>$PROJECT_DIR$/CursorWebsite/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>CursorWebsite</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="CursorWebsite.war">
+      <element id="artifact" artifact-name="CursorWebsite:war exploded" />
+    </root>
+  </artifact>
+</component>

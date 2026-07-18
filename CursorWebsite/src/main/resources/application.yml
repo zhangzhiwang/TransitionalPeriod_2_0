@@ -1,0 +1,32 @@
+# CursorWebsite Spring Boot 配置（JDK8 + Boot 2.7）。
+# （由 Curosr 自动生成）
+
+server:
+  port: 8080
+  servlet:
+    # 便于 JSP 在内嵌 Tomcat 下解析。
+    register-default-servlet: true
+    context-path: /cursorWebsite
+
+spring:
+  datasource:
+    # 请按本机 MySQL 修改账号密码。
+    url: jdbc:mysql://127.0.0.1:3306/cursor_website?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      # never：启动不自动跑 SQL；需要自动建表灌数时改为 always。
+      mode: never
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      encoding: UTF-8
+      continue-on-error: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto

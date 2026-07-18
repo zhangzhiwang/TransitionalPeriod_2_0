@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 继承父工程，作为 CursorWebsite Web 子模块。 -->
+    <!-- （由 Curosr 自动生成） -->
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>TransitionalPeriod_2_0</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- 本模块坐标与打包方式（war = Web 工程）。 -->
+    <!-- （由 Curosr 自动生成） -->
+    <artifactId>CursorWebsite</artifactId>
+    <packaging>war</packaging>
+    <name>CursorWebsite</name>
+    <description>由 Cursor 自动创建的前后端网站模块（Spring Boot 2.7）</description>
+
+    <properties>
+        <!-- 源码文件编码。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Spring Boot 版本：对齐架构文档 JDK8 + Spring 5。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <spring-boot.version>2.7.18</spring-boot.version>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <!-- 导入 Spring Boot BOM，统一依赖版本。 -->
+    <!-- （由 Curosr 自动生成） -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Spring Boot Web：Spring MVC + 内嵌 Tomcat。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- JSP 引擎：支持 index.jsp 等视图。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <!-- JSTL：JSP 循环与条件输出。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!-- Lombok：简化实体与构造注入样板代码。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- MyBatis-Plus：简单 CRUD，对齐架构文档。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.5</version>
+        </dependency>
+        <!-- MySQL 驱动。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- 最终 war 包名。 -->
+        <!-- （由 Curosr 自动生成） -->
+        <finalName>CursorWebsite</finalName>
+        <plugins>
+            <!-- 编译插件：Java 8。 -->
+            <!-- （由 Curosr 自动生成） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <!-- Spring Boot 打包与运行插件。 -->
+            <!-- （由 Curosr 自动生成） -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+            <!-- War 打包插件。 -->
+            <!-- （由 Curosr 自动生成） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
